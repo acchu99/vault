@@ -28,9 +28,11 @@ export default async function Home() {
       const data = res.response;
       let condition = data.length > 0
 
+      console.log(data);
+
       return (
         <main>
-          <h1 className="text-2xl text-zinc-700 mb-6">Existing User</h1>
+          <h1 className="text-2xl text-zinc-700 mb-6">All Passwords</h1>
           {condition ? <CardGroup passwords={data} /> : <p>Add passwords to your vault to view them here.</p>}
         </main>
       );
@@ -38,7 +40,7 @@ export default async function Home() {
     else if (out.response == 'S-01') {
       return (
         <main>
-          <h1 className="text-2xl text-zinc-700 mb-6">New User</h1>
+          <h1 className="text-2xl text-zinc-700 mb-6">Add passwords to your vault to see them here!</h1>
         </main>
       );
     }else{

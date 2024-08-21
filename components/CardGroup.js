@@ -12,7 +12,7 @@ export default function CardGroup({ passwords }) {
 
   if (rendered){
     return (
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-8">
           {passwords.map((el) => <Card id={el.id} key={el.id} name={el.name} site={el.site} username={el.username} note={el.note} />)}
       </div>
     )

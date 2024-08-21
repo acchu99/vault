@@ -26,6 +26,9 @@ export default function Navigation() {
                     <SignInButton />
                 </SignedOut>
                 <SignedIn>
+                    <Navbar.Link as={Link} href="/table">
+                        Table View
+                    </Navbar.Link>
                     <Navbar.Link as={Link} href="/create">
                         Add Password
                     </Navbar.Link>

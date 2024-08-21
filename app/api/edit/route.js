@@ -2,11 +2,11 @@ import { NextResponse } from "next/server";
 import clientPromise from "@/lib/db";
 import { encrypt } from "@/lib/cryptography";
 import db from "@/lib/firebase/firestore";
-import { collection, addDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 export async function POST(request) {
     const input = await request.json();
-    const { wizard, site, name, username, password, note } = input
+    const { wizard, cloak, site, name, username, password, note } = input
 
     try {
         const client = await clientPromise;
@@ -17,7 +17,9 @@ export async function POST(request) {
 
         const cypherText = encrypt(password, key)
 
-        const docRef = await addDoc(collection(db, wizard), {
+        const docRef = doc(db, wizard, cloak);
+
+        await updateDoc(docRef, {
             site,
             name,
             username,
