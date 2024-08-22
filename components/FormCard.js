@@ -7,7 +7,7 @@ const clipboardClassName = "rounded-l-none rounded-r-rg"
 
 export default function FormCard({ site, name, username, password, note, submitAction, deleteAction }) {
     const [rendered, setRendered] = useState(false);
-    const [edit, setEdit] = useState(true);
+    const [edit, setEdit] = useState(false);
     const [show, setShow] = useState(false);
 
     useEffect(() => {

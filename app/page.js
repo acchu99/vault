@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { auth, currentUser } from "@clerk/nextjs/server";
 import CardGroup from '@/components/CardGroup';
+import Table from '@/components/Table';
 
 export default async function Home() {
   const { userId } = auth();
@@ -26,14 +27,15 @@ export default async function Home() {
     if (out.response == 'S-02') {
       const res = await getPasswords({ collectionName: userId });
       const data = res.response;
-      let condition = data.length > 0
 
-      console.log(data);
+      const overflowLength = 2
+      const condition1 = data.length > 0 && data.length <= overflowLength
+      const condition2 = data.length > overflowLength
 
       return (
         <main>
           <h1 className="text-2xl text-zinc-700 mb-6">All Passwords</h1>
-          {condition ? <CardGroup passwords={data} /> : <p>Add passwords to your vault to view them here.</p>}
+          {condition1 ? <CardGroup passwords={data} /> : condition2 ? <Table rowData={data} /> :<p>Add passwords to your vault to view them here.</p>}
         </main>
       );
     }
