@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import FormCard from '@/components/FormCard';
 
 async function updateOrDeletePassword(input, action) {
-    const baseUrl = "http://localhost:3000/api"
+    const baseUrl = !process.env.PRODUCTION ? "http://localhost:3000/api" : 'https://gringotts-vault.vercel.app/api'
     const fullUrl = action == 'edit' ? `${baseUrl}/edit` : `${baseUrl}/delete`
 
     const request = await axios.post(
@@ -18,7 +18,7 @@ export default async function UpdateHorcrux({ params }) {
     const { userId } = auth();
 
     async function getPassword(input) {
-        const endpoint = `http://localhost:3000/api/findOne`
+        const endpoint = !process.env.PRODUCTION ? `http://localhost:3000/api/findOne` : 'https://gringotts-vault.vercel.app/api/findOne'
         const config = { headers: { 'Content-Type': 'application/json' } }
         const request = await axios.post(endpoint, input, config);
         return request.data

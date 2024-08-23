@@ -6,14 +6,14 @@ export default async function Home() {
   const { userId } = auth();
 
   async function setUser(input) {
-    const endpoint = `http://localhost:3000/api`;
+    const endpoint = !process.env.PRODUCTION ? `http://localhost:3000/api` : 'https://gringotts-vault.vercel.app/api';
     const config = { headers: { 'Content-Type': 'application/json' } };
     const request = await axios.post(endpoint, input, config);
     return request.data
   }
 
   async function getPasswords(input) {
-    const endpoint = `http://localhost:3000/api/findAll`
+    const endpoint = !process.env.PRODUCTION ? `http://localhost:3000/api/findAll` : 'https://gringotts-vault.vercel.app/api/findAll'
     const config = { headers: { 'Content-Type': 'application/json' } }
     const request = await axios.post(endpoint, input, config);
     return request.data

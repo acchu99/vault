@@ -5,7 +5,7 @@ import Form from "@/components/Form";
 
 async function savePassword(input) {
   const request = await axios.post(
-    `http://localhost:3000/api/create`,
+    !process.env.PRODUCTION ? `http://localhost:3000/api/create` : 'https://gringotts-vault.vercel.app/api/create',
     input,
     { headers: { 'Content-Type': 'application/json' } },
   );
