@@ -29,9 +29,6 @@ export default function Navigation() {
                     <Navbar.Link as={Link} href="/create">
                         Add Password
                     </Navbar.Link>
-                    <Navbar.Link as={Link} href="/demo">
-                        Add Password (demo)
-                    </Navbar.Link>
                     <UserButton />
                 </SignedIn>
             </Navbar.Collapse>

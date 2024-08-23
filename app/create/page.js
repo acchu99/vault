@@ -35,7 +35,6 @@ export default async function CreateHorcrux() {
 
   return (
     <div>
-      <h1 className="text-2xl text-zinc-700">Add New Password</h1>
       <Form action={createFormSubmission} />
     </div>
   )
