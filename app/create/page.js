@@ -2,10 +2,12 @@ import axios from 'axios';
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from 'next/navigation'
 import Form from "@/components/Form";
+import { getEndpoint } from "@/lib/endpoint";
 
 async function savePassword(input) {
+  let endpoint = `${getEndpoint(process.env.PRODUCTION)}/create`;
   const request = await axios.post(
-    !process.env.PRODUCTION ? `http://localhost:3000/api/create` : 'https://gringotts-vault.vercel.app/api/create',
+    endpoint,
     input,
     { headers: { 'Content-Type': 'application/json' } },
   );

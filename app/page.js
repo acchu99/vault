@@ -1,19 +1,20 @@
 import axios from 'axios';
 import { auth, currentUser } from "@clerk/nextjs/server";
 import HomeView from '@/components/HomeView';
+import { getEndpoint } from "@/lib/endpoint";
 
 export default async function Home() {
   const { userId } = auth();
 
   async function setUser(input) {
-    const endpoint = !process.env.PRODUCTION ? `http://localhost:3000/api` : 'https://gringotts-vault.vercel.app/api';
+    const endpoint = getEndpoint(process.env.PRODUCTION);
     const config = { headers: { 'Content-Type': 'application/json' } };
     const request = await axios.post(endpoint, input, config);
     return request.data
   }
 
   async function getPasswords(input) {
-    const endpoint = !process.env.PRODUCTION ? `http://localhost:3000/api/findAll` : 'https://gringotts-vault.vercel.app/api/findAll'
+    const endpoint = `${getEndpoint(process.env.PRODUCTION)}/findAll`;
     const config = { headers: { 'Content-Type': 'application/json' } }
     const request = await axios.post(endpoint, input, config);
     return request.data
