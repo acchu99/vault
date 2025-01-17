@@ -3,9 +3,10 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from 'next/navigation'
 import Form from "@/components/Form";
 import { getEndpoint } from "@/lib/endpoint";
+import { getRequiredEnvVar } from "@/lib/getEnv"
 
 async function savePassword(input) {
-  let endpoint = `${getEndpoint(process.env.PRODUCTION)}/create`;
+  let endpoint = `${getEndpoint(getRequiredEnvVar("PRODUCTION"))}/create`;
   const request = await axios.post(
     endpoint,
     input,

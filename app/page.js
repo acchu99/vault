@@ -2,19 +2,20 @@ import axios from 'axios';
 import { auth, currentUser } from "@clerk/nextjs/server";
 import HomeView from '@/components/HomeView';
 import { getEndpoint } from "@/lib/endpoint";
+import { getRequiredEnvVar } from "@/lib/getEnv"
 
 export default async function Home() {
   const { userId } = auth();
 
   async function setUser(input) {
-    const endpoint = getEndpoint(process.env.PRODUCTION);
+    const endpoint = getEndpoint(getRequiredEnvVar("PRODUCTION"));
     const config = { headers: { 'Content-Type': 'application/json' } };
     const request = await axios.post(endpoint, input, config);
     return request.data
   }
 
   async function getPasswords(input) {
-    const endpoint = `${getEndpoint(process.env.PRODUCTION)}/findAll`;
+    const endpoint = `${getEndpoint(getRequiredEnvVar("PRODUCTION"))}/findAll`;
     const config = { headers: { 'Content-Type': 'application/json' } }
     const request = await axios.post(endpoint, input, config);
     return request.data

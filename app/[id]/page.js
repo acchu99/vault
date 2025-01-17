@@ -3,9 +3,10 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from 'next/navigation'
 import FormCard from '@/components/FormCard';
 import { getEndpoint } from "@/lib/endpoint";
+import { getRequiredEnvVar } from "@/lib/getEnv"
 
 async function updateOrDeletePassword(input, action) {
-    const fullUrl = action == 'edit' ? `${getEndpoint(process.env.PRODUCTION)}/edit` : `${getEndpoint(process.env.PRODUCTION)}/delete`
+    const fullUrl = action == 'edit' ? `${getEndpoint(getRequiredEnvVar("PRODUCTION"))}/edit` : `${getEndpoint(getRequiredEnvVar("PRODUCTION"))}/delete`
     const request = await axios.post(
         fullUrl,
         input,
@@ -17,7 +18,7 @@ export default async function UpdateHorcrux({ params }) {
     const { userId } = auth();
 
     async function getPassword(input) {
-        const endpoint = `${getEndpoint(process.env.PRODUCTION)}/findOne`
+        const endpoint = `${getEndpoint(getRequiredEnvVar("PRODUCTION"))}/findOne`
         const config = { headers: { 'Content-Type': 'application/json' } }
         const request = await axios.post(endpoint, input, config);
         return request.data
