@@ -6,7 +6,7 @@ import { getEndpoint } from "@/lib/endpoint";
 import { getRequiredEnvVar } from "@/lib/getEnv"
 
 async function savePassword(input) {
-  let endpoint = `${getEndpoint(getRequiredEnvVar("PRODUCTION"))}/create`;
+  let endpoint = `${getEndpoint(getRequiredEnvVar("NODE_ENV"))}/create`;
   const request = await axios.post(
     endpoint,
     input,

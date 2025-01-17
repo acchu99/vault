@@ -6,7 +6,7 @@ import { getEndpoint } from "@/lib/endpoint";
 import { getRequiredEnvVar } from "@/lib/getEnv"
 
 async function updateOrDeletePassword(input, action) {
-    const fullUrl = action == 'edit' ? `${getEndpoint(getRequiredEnvVar("PRODUCTION"))}/edit` : `${getEndpoint(getRequiredEnvVar("PRODUCTION"))}/delete`
+    const fullUrl = action == 'edit' ? `${getEndpoint(getRequiredEnvVar("NODE_ENV"))}/edit` : `${getEndpoint(getRequiredEnvVar("NODE_ENV"))}/delete`
     const request = await axios.post(
         fullUrl,
         input,
@@ -18,7 +18,7 @@ export default async function UpdateHorcrux({ params }) {
     const { userId } = auth();
 
     async function getPassword(input) {
-        const endpoint = `${getEndpoint(getRequiredEnvVar("PRODUCTION"))}/findOne`
+        const endpoint = `${getEndpoint(getRequiredEnvVar("NODE_ENV"))}/findOne`
         const config = { headers: { 'Content-Type': 'application/json' } }
         const request = await axios.post(endpoint, input, config);
         return request.data

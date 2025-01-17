@@ -8,14 +8,14 @@ export default async function Home() {
   const { userId } = auth();
 
   async function setUser(input) {
-    const endpoint = getEndpoint(getRequiredEnvVar("PRODUCTION"));
+    const endpoint = getEndpoint(getRequiredEnvVar("NODE_ENV"));
     const config = { headers: { 'Content-Type': 'application/json' } };
     const request = await axios.post(endpoint, input, config);
     return request.data
   }
 
   async function getPasswords(input) {
-    const endpoint = `${getEndpoint(getRequiredEnvVar("PRODUCTION"))}/findAll`;
+    const endpoint = `${getEndpoint(getRequiredEnvVar("NODE_ENV"))}/findAll`;
     const config = { headers: { 'Content-Type': 'application/json' } }
     const request = await axios.post(endpoint, input, config);
     return request.data
